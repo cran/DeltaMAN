@@ -1,0 +1,11 @@
+\documentclass{article}
+\setlength\parindent{0pt}
+\begin{document}
+
+<<echo = F, results='asis', eval = T>>=
+summary(delta_obj(), tex = T, fullReport = input$fullReport, digits = digits())
+@
+
+
+
+\end{document}

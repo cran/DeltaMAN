@@ -1,0 +1,139 @@
+<!-- INCLUDE EXTERNAL HTML FILES -->
+<script>
+function includeHTML() {
+  var z, i, elmnt, file, xhttp;
+  /*loop through a collection of all HTML elements:*/
+  z = document.getElementsByTagName("*");
+  for (i = 0; i < z.length; i++) {
+    elmnt = z[i];
+    /*search for elements with a certain atrribute:*/
+    file = elmnt.getAttribute("w3-include-html");
+    if (file) {
+      /*make an HTTP request using the attribute value as the file name:*/
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+          if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+          if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+          /*remove the attribute, and call this function once more:*/
+          elmnt.removeAttribute("w3-include-html");
+          includeHTML();
+        }
+      }      
+      xhttp.open("GET", file, true);
+      xhttp.send();
+      /*exit the function:*/
+      return;
+    }
+  }
+};
+</script>
+
+<style>
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+  height: 75px; 
+}
+
+.left {
+  width: 40%;
+}
+
+.middle {
+  width: 35%;
+}
+.right {
+  width: 25%;
+}
+.credits{
+  width: 25%;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+</style>
+
+<!-- LOGO AND LINKS TO TWITTER AND LINKEDIN -->
+
+<div style="background-color: #292c2f;
+			text-align: center;
+			padding: 15px;
+			margin-top: 30px;">
+	<div style="color:#8d9093; font-size: 12px">
+		Ana D. Maldonado<sup>1</sup>, Pedro Femia Marzo<sup>2</sup>, Antonio Martín Andrés<sup>2</sup>
+		<p>
+		  <sup>1</sup> Dep. of Mathematics &mdash;  University of Almería (Spain)
+		<br>
+		  <sup>2</sup>Group of Biostatistics (Faculty of Medicine)  &mdash; Dep. of Statistics and O.R. - University of Granada (Spain)
+		</p>
+<!--		<p>
+		  Dep. of Statistics and O.R. - University of Granada (Spain)
+		</p>
+-->
+	</div>
+	
+	
+<!-- HORIZONTAL LINE -->
+	<hr style="width:40%;height:2px;border-width:1px;border-color:#999897;margin-top:0.5em;margin-bottom:0">
+	
+	
+<!-- ICONS FOR CONTACT LICENSE... -->
+
+	
+	  <div class="row" style="color:#8d9093;font-size: 14px">
+	 <div class="column credits" align = "center">
+      <p> <b>Homepage</b></p>
+      <a href="https://www.ugr.es/~bioest/software/delta/index.php"><i class="fa fa-home" style="font-size:22px;color:#8d9093"></i></a>
+    </div>
+    <div class="column credits" align = "center">
+      <p> <b>Contact</b></p>
+      <a href="mailto:pfemia@ugr.es,ana.d.maldonado@ual.es?Subject=Delta%20shinyapp%20query"><i class="fa fa-envelope" style="font-size:22px;color:#8d9093"></i></a>
+    </div>
+    <div class="column credits" align = "center">
+      <p> <b>License and terms of use</b></p>
+      <a data-toggle="modal" data-target="#openDisclaimer"><i class="fa fa-creative-commons" style="font-size:22px;color:#8d9093"></i></a> 
+
+    </div>
+    <div class="column credits" align = "center">
+      <p> <b>App development</b></p>
+      <a href="https://github.com/admaldonado"><i class="fa fa-github" style="font-size:22px;color:#8d9093"></i></a>
+    </div>
+  </div>
+	
+</div>
+
+
+
+<!-- Modal License and terms of use -->
+<div class="modal fade" id="openDisclaimer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Terms of use of our software</h3>
+      </div>
+      <div class="modal-body">
+        
+        <div w3-include-html="disclaimer.html"></div> <!-- INCLUDE HERE HTML FILE WITH TEXT -->
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+includeHTML();
+</script>
